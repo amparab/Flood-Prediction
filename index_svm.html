@@ -1,0 +1,317 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+<meta charset="UTF-8"> 
+<title> Flood Prediction System </title>
+<meta name="viewport" content="initial-scale=1.0, width=device-width" />
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="   crossorigin=""/>
+<script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+   integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
+   crossorigin=""></script>
+<script type="text/javascript" src="/eel.js"></script>
+<script>
+window.onload = function()
+{
+a = document.getElementById("location");
+var userloc = a.options[a.selectedIndex].value;
+report(userloc);
+};
+function report(loc){
+    document.getElementById("rainfall").value="";
+    document.getElementById("tide").value="";
+    document.getElementById("drainvalue").innerHTML="";
+    document.getElementById("res").innerHTML="";
+if(loc=='Santacruz'){     
+    alert("santacruz");
+    document.getElementById('mapid').innerHTML = "<div id='smap' style='width: 100%; height: 100%;'></div>";
+   
+var smap = L.map('smap').setView([ 19.084563, 72.834836 ], 13);
+L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1Ijoic2FoaWwtbWFwYm94IiwiYSI6ImNqc3VyMTVoNzIweTM0Ym82M3NuOGd4OTMifQ.ictab7heJhKcl5VjSLQjTA', {
+    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+    maxZoom: 18,
+    id: 'mapbox.streets',
+    accessToken: 'pk.eyJ1Ijoic2FoaWwtbWFwYm94IiwiYSI6ImNqc3VyMTVoNzIweTM0Ym82M3NuOGd4OTMifQ.ictab7heJhKcl5VjSLQjTA'
+}).addTo(smap);
+var geojsonFeature={
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+        
+        
+        
+        
+        "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              72.82999992370605,
+              19.087994472614195
+            ],
+            [
+              72.82570838928223,
+              19.08823780693182
+            ],
+            [
+              72.82570838928223,
+              19.080430652608708
+            ],
+            [
+              72.83675909042358,
+              19.079883124080123
+            ],
+            [
+              72.83796072006224,
+              19.087710582124963
+            ],
+            [
+              72.82999992370605,
+              19.087994472614195
+            ]
+          ]
+        ]
+      },
+        
+        
+        
+        
+        
+      "style": {
+        "stroke": "#555555",
+        "stroke-width": "2",
+        "stroke-opacity": 1.0,
+        "fill": "red",
+        "fill-opacity": 0.5
+      }
+      
+        
+        
+        
+        
+        
+        
+        
+        
+    }
+  ]
+};
+    L.geoJSON(geojsonFeature).addTo(smap);      
+}   
+else{
+    alert("colaba");
+    document.getElementById('mapid').innerHTML = "<div id='cmap' style='width: 100%; height: 100%;'></div>";
+    //mymap.remove();
+var colabamap = new L.map('cmap').setView([ 18.92, 72.81 ], 13);
+L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1Ijoic2FoaWwtbWFwYm94IiwiYSI6ImNqc3VyMTVoNzIweTM0Ym82M3NuOGd4OTMifQ.ictab7heJhKcl5VjSLQjTA', {
+    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+    maxZoom: 18,
+    id: 'mapbox.streets',
+    accessToken: 'pk.eyJ1Ijoic2FoaWwtbWFwYm94IiwiYSI6ImNqc3VyMTVoNzIweTM0Ym82M3NuOGd4OTMifQ.ictab7heJhKcl5VjSLQjTA'
+}).addTo(colabamap);
+var geojsonFeature={
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "stroke": "#555555",
+        "stroke-width": 3,
+        "stroke-opacity": 1,
+        "fill": "#0c769e",
+        "fill-opacity": 0.5},
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              72.81806945800781,
+              18.925448623194445
+            ],
+            [
+              72.82639503479004,
+              18.922282151953898
+            ],
+            [
+              72.82244682312012,
+              18.917166956302424
+            ],
+            [
+              72.8144645690918,
+              18.911645617107514
+            ],
+            [
+              72.80450820922852,
+              18.903525669500272
+            ],
+            [
+              72.80742645263672,
+              18.890370518100625
+            ],
+            [
+              72.83411979675293,
+              18.922038574758123
+            ],
+            [
+              72.84098625183105,
+              18.920252331142763
+            ],
+            [
+              72.83712387084961,
+              18.92731600118485
+            ],
+            [
+              72.81806945800781,
+              18.925448623194445
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+};
+    L.geoJSON(geojsonFeature).addTo(colabamap);      
+}
+    
+}
+</script>
+<style>
+    .form-style-4{
+        width: 100%;
+        font-size: 16px;
+        background: #495C70;
+        padding: 30px 30px 15px 30px;
+        border: 5px solid #53687E;     
+    }
+    .form-style-4 input[type=submit],
+    .form-style-4 input[type=button],
+    .form-style-4 textarea,
+    .form-style-4 label
+    {   font-family: Georgia, "Times New Roman", Times, serif;
+        font-size: 16px;
+        color: #fff;    
+    }
+    .form-style-4 label {
+        display:block;
+        margin-bottom: 10px;
+    }
+    .form-style-4 label > span{
+        display: inline-block;
+        float: left;
+        width: 150px;
+    }
+    .form-style-4 input[type=text],
+    .form-style-4 input[type=number] 
+    {   width: 275px;
+        outline: none;
+    }
+    .width{
+        width: 275px;
+        outline: none;
+    }
+.style-div{
+/*align-content: center;*/
+   margin:auto;
+   width: 450px;
+}
+    .form-style-4 input[type=submit],
+    .form-style-4 input[type=button]{
+        background: #576E86;
+        border: none;
+        padding: 8px 10px 8px 10px;
+        border-radius: 5px;
+        color: #A8BACE;
+    }
+    .form-style-4 input[type=submit]:hover,
+    .form-style-4 input[type=button]:hover{
+    background: #394D61;
+    } 
+    
+    
+</style>
+</head> 
+<body><div><div class="style-div">
+<form class="form-style-4" action="" method="post" onsubmit="myFunction()">
+<label for ="field0">
+    <span>Location</span>
+    <select name="Location" id="location" class="width" onchange="report(this.value)" onload="report(this.value)">
+        <option value="Santacruz">Santacruz</option> 
+        <option value="Colaba">Colaba</option>
+    </select>
+</label>
+<label for="field1">
+<span>Rainfall</span> 
+<input type="number" name="field1" id="rainfall" onkeyup="multiplyFactor()" required="true" class="width" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==4) return false;" min="0" oninput="this.value = Math.abs(this.value)"  placeholder="Rainfall in mm" autofocus />
+</label>
+<label for="field2">
+    <span>Drainage</span>
+    <label id="drainvalue" class="width">
+    <span></span>
+</label></label><br><br>
+<label for="field3">
+<span>Tide</span><input type="number" id="tide" class="width" name="field3" required="true" placeholder="Tide" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==2) return false;" min="0" max=7 oninput="this.value = Math.abs(this.value)" />
+</label>
+<label>
+<span> </span>
+    <input type="button" value="Submit" onclick="drain();" />
+</label>
+</form></div>
+<div class="style-div">
+    <h3><p id="res">Result = </p></h3>
+</div>
+</div>  <!--  <p id="demo1">R</p>    <p id="demo2">D</p>    <p id="demo3">T</p>-->
+    
+<div style="width: 100%; height: 410px" class="style-div" id="mapid"></div>
+</body>
+<script>      
+function multiplyFactor(){
+    a=document.getElementById("location");
+            var loc = a.options[a.selectedIndex].value;  
+                if(loc=='Santacruz')
+               { 
+               // alert('Santacruz');
+                var r = document.getElementById("rainfall").value;
+                var d = r* 7.83;
+                document.getElementById('drainvalue').innerHTML = d;
+               }else     //(loc=='Colaba')
+              { //alert('Colaba');
+                var r = document.getElementById("rainfall").value;
+                var d = r * 1.74;
+                document.getElementById('drainvalue').innerHTML = d; } 
+}
+    function drain()
+            {
+                a=document.getElementById("location");
+            var loc = a.options[a.selectedIndex].value;  
+                if(loc=='Santacruz')
+               { 
+               // alert('Santacruz');
+                var r = document.getElementById("rainfall").value;
+                var d = r* 7.83;
+                //document.getElementById('drainvalue').innerHTML = d;
+                var t = document.getElementById("tide").value;
+                //eel.expose(svm_function);
+                eel.svm_function(loc,r,d,t)(print_return);
+               }
+              else     //(loc=='Colaba')
+              { //alert('Colaba');
+                var r = document.getElementById("rainfall").value;
+                var d = r * 1.74;
+                //document.getElementById('drainvalue').innerHTML = d;   
+                var t = document.getElementById("tide").value;
+                //eel.expose(svm_function);
+                eel.svm_function(loc,r,d,t)(print_return);       
+
+              }
+            }
+function print_return(ynew){
+    if(ynew==1){
+document.getElementById("res").innerHTML="Result: Flood Occured";
+        }else{
+document.getElementById("res").innerHTML="Result: Flood Not Occured";
+               
+        }}
+    
+</script>
+</html> 
